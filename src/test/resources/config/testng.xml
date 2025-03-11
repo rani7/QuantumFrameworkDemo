@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="DemoTestSuite">
+    <test name="DemoTestScenario" parallel="tests" thread-count="1" >
+        <classes>
+            <class name="runner.TestRunner">
+            </class>
+        </classes>
+    </test>
+</suite>

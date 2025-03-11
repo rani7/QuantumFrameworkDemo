@@ -4,43 +4,101 @@
   <artifactId>QuantumFWDemo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
-    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+  <properties>
+		<testngXmlDir>src/main/resources/config</testngXmlDir>
+		<testngXmlFile>testng.xml</testngXmlFile>
+		<skipTests>false</skipTests>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<junit.version>4.13.1</junit.version>
+		<cucumber.version>6.9.0</cucumber.version>
+		<maven.compiler.version>3.8.1</maven.compiler.version>
+		<maven.surefire.version>2.22.2</maven.surefire.version>
+  </properties>
+  
 <dependencies>
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
     <artifactId>selenium-java</artifactId>
     <version>4.28.1</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+
 <dependency>
     <groupId>org.testng</groupId>
     <artifactId>testng</artifactId>
     <version>7.10.2</version>
     <scope>test</scope>
 </dependency>
-<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+
 <dependency>
     <groupId>io.cucumber</groupId>
     <artifactId>cucumber-java</artifactId>
     <version>7.21.1</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+
 <dependency>
     <groupId>io.cucumber</groupId>
     <artifactId>cucumber-junit</artifactId>
     <version>7.21.1</version>
     <scope>test</scope>
 </dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+<dependency>
+	<groupId>io.cucumber</groupId>
+	<artifactId>cucumber-testng</artifactId>
+	<version>${cucumber.version}</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>junit</groupId>
+	<artifactId>junit</artifactId>
+	<version>${junit.version}</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.apache.poi</groupId>
+	<artifactId>poi</artifactId>
+	<version>4.1.2</version>
+</dependency>
 <dependency>
     <groupId>org.apache.poi</groupId>
     <artifactId>poi-ooxml</artifactId>
-    <version>5.2.3</version>
-</dependency>
-<dependency>
-    <groupId>io.github.bonigarcia</groupId>
-    <artifactId>webdrivermanager</artifactId>
-    <version>5.0.3</version>
+    <version>4.1.2</version>
 </dependency>
 </dependencies>
+
+<build>
+	<plugins>
+		   <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.compiler.version}</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.version}</version>
+				<configuration>
+					<argLine>-Dfile.encoding=${project.build.sourceEncoding}</argLine>
+					<suiteXmlFiles>
+						<suiteXmlFile>${testngXmlDir}/${testngXmlFile}</suiteXmlFile>
+					</suiteXmlFiles>
+					<parallel>methods</parallel>
+					<skipTests>${skipTests}</skipTests>
+				</configuration>
+			</plugin>
+	</plugins>
+</build>
 </project>
